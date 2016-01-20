@@ -7,6 +7,7 @@ macx{
 
 linux{
     DEFINES += define __LINUX_ALSA__=1
+    LIBS += -lasound
 }
 win32{
     DEFINES += __WINDOWS_MM__=1
@@ -30,3 +31,4 @@ SOURCES += \
 
 DISTFILES += \
     $$PWD/README.md
+    $$PWD/LICENSE
