@@ -7,9 +7,13 @@ QMidi is a Qt library which wraps rtMidi library and allows you to communicate w
 
 This is a work in progress and it is mostly broken.
 
+Build status
+---
+[![Build Status](https://travis-ci.org/thomasgeissl/QMidi.svg?branch=master)](https://travis-ci.org/thomasgeissl/QMidi)
+
 Dependencies
 ---
-* rtMidi <http://github.com/thestk/rtMidi>
+* rtMidi <http://github.com/thestk/rtMidi> (already included)
 * Qt > 5.5
 
 Contribution
