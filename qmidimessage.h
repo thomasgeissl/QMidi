@@ -2,6 +2,7 @@
 #define QMIDIMESSAGE_H
 
 #include <QObject>
+#include <vector>
 
 //https://github.com/danomatika/ofxMidi/blob/master/src/ofxMidiConstants.h
 enum QMidiStatus {
