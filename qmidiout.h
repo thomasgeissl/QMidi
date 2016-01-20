@@ -1,6 +1,7 @@
 #ifndef QMIDIOUT_H
 #define QMIDIOUT_H
 
+#include <QStringList>
 #include <QObject>
 #include "RtMidi.h"
 #include "qmidimessage.h"
