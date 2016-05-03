@@ -49,6 +49,26 @@ public:
     {
         return _status;
     }
+    unsigned int getChannel()
+    {
+        return _channel;
+    }
+    unsigned int getPitch()
+    {
+        return _pitch;
+    }
+    unsigned int getVelocity()
+    {
+        return _velocity;
+    }
+    unsigned int getControl()
+    {
+        return _control;
+    }
+    unsigned int getValue()
+    {
+        return _value;
+    }
     double getDeltaTime()
     {
         return _deltaTime;
