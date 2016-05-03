@@ -5,7 +5,7 @@ Description
 ---
 QMidi is a Qt library which wraps rtMidi library and allows you to communicate with midi devices.
 
-This is a work in progress and it is mostly broken.
+This is a work in progress and not very stable. Some features are still missing.
 
 Build status
 ---
