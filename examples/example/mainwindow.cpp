@@ -72,6 +72,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     mainWidget->setLayout(mainLayout);
     setCentralWidget(mainWidget);
+
+    connect(_midiIn, SIGNAL(midiMessageReceived(QMidiMessage*)), this, SLOT(onMidiMessageReceive(QMidiMessage*)));
 }
 
 MainWindow::~MainWindow()
@@ -81,8 +83,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::onMidiMessageReceive(QMidiMessage *message)
 {
-    _inConsole->appendPlainText("");
-
+    _inConsole->appendPlainText("status "+QString::number(message->getStatus())+", pitch "+QString::number(message->getPitch()));
 }
 
 void MainWindow::onInOpenPortButtonClicked(bool value)
