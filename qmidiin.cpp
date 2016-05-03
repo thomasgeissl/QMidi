@@ -3,7 +3,7 @@
 QMidiIn::QMidiIn(QObject *parent) : QObject(parent),
     _midiIn(new RtMidiIn())
 {
-    _midiIn->setCallback(&QMidiIn::callback);
+    _midiIn->setCallback(&QMidiIn::callback, this);
 }
 
 QStringList QMidiIn::getPorts()
