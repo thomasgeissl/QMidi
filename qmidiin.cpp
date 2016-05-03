@@ -42,14 +42,14 @@ void QMidiIn::setIgnoreTypes(bool sysex, bool time, bool sense)
 }
 void QMidiIn::onMidiMessageReceive(QMidiMessage *msg)
 {
+    msg->moveToThread(thread());
     emit midiMessageReceived(msg);
-    qDebug()<<"onMidiMessgeReceive"<<msg->getDeltaTime();
 }
 
 void QMidiIn::callback(double deltatime, std::vector<unsigned char> *message, void *userData)
 {
     QMidiIn* midiIn = (QMidiIn*) userData;
-    QMidiMessage *midiMessage = new QMidiMessage(midiIn);
+    QMidiMessage *midiMessage = new QMidiMessage();
 
         if((message->at(0)) >= MIDI_SYSEX) {
             midiMessage->setStatus((QMidiStatus)(message->at(0) & 0xFF));
