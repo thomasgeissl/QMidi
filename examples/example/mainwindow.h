@@ -31,6 +31,7 @@ public slots:
     void onMidiMessageReceive(QMidiMessage* message);
 private slots:
     void onInOpenPortButtonClicked(bool value);
+    void onInOpenVirtualPortButtonClicked(bool value);
     void onOutOpenPortButtonClicked(bool value);
     void onSendMessageButtonClicked(bool value);
 
