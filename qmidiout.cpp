@@ -1,5 +1,5 @@
 #include "qmidiout.h"
-
+#include <QDebug>
 QMidiOut::QMidiOut(QObject *parent) : QObject(parent),
     _midiOut(new RtMidiOut())
 {
@@ -40,13 +40,16 @@ void QMidiOut::sendNoteOff(unsigned int channel, unsigned int pitch, unsigned in
     message.push_back(velocity);
     sendRawMessage(message);
 }
+void QMidiOut::sendMessage(QMidiMessage *message)
+{
+    std::vector<unsigned char> rawMessage = message->getRawMessage();
+    qDebug()<<"send message"<<rawMessage.front();
+    sendRawMessage(rawMessage);
+}
 
 void QMidiOut::sendRawMessage(std::vector<unsigned char> &message)
 {
-
+    _midiOut->sendMessage(&message);
 }
 
-void QMidiOut::sendMessage(QMidiMessage *message)
-{
 
-}

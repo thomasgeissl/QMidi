@@ -109,8 +109,48 @@ public:
         _deltaTime = deltaTime;
         return this;
     }
+    QMidiMessage* setRawMessage(std::vector<unsigned char> rawMessage)
+    {
+        _rawMessage = rawMessage;
+        return this;
+    }
+
     std::vector<unsigned char> getRawMessage()
     {
+        if(_rawMessage.size() == 0)
+        {
+            switch(_status)
+            {
+            case MIDI_NOTE_ON:{
+                _rawMessage.push_back(MIDI_NOTE_ON+_channel-1);
+                _rawMessage.push_back(_pitch);
+                _rawMessage.push_back(_velocity);
+                break;
+            }
+            case MIDI_NOTE_OFF:{
+                _rawMessage.push_back(MIDI_NOTE_OFF+_channel-1);
+                _rawMessage.push_back(_pitch);
+                _rawMessage.push_back(_velocity);
+                break;
+            }
+            case MIDI_CONTROL_CHANGE:{
+                _rawMessage.push_back(MIDI_CONTROL_CHANGE+_channel-1);
+                _rawMessage.push_back(_control);
+                _rawMessage.push_back(_value);
+                break;
+            }
+            case MIDI_PROGRAM_CHANGE:{
+                _rawMessage.push_back(MIDI_PROGRAM_CHANGE+_channel-1);
+                _rawMessage.push_back(_control);
+                _rawMessage.push_back(_value);
+                break;
+            }
+                //TODO: check protocol and implement other cases
+            default:{
+                break;
+            }
+            }
+        }
         return _rawMessage;
     }
 

@@ -15,8 +15,8 @@ public:
     QStringList getPorts();
     void sendNoteOn(unsigned int channel, unsigned int pitch, unsigned int velocity);
     void sendNoteOff(unsigned int channel, unsigned int pitch, unsigned int velocity);
-    void sendRawMessage(std::vector<unsigned char> &message);
     void sendMessage(QMidiMessage *message);
+    void sendRawMessage(std::vector<unsigned char> &message);
     void openPort(unsigned int index);
     void openVirtualPort(QString name);
 private:
