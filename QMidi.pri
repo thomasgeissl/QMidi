@@ -21,13 +21,15 @@ HEADERS += \
     $$PWD/qmidiin.h \
     $$PWD/qmidiout.h \
     $$PWD/qmidimessage.h \
-    $$PWD/qmidimapper.h
+    $$PWD/qmidimapper.h \
+    $$PWD/qmidipianoroll.h
 SOURCES += \
     $$PWD/libs/rtmidi/RtMidi.cpp \
     $$PWD/qmidiin.cpp \
     $$PWD/qmidiout.cpp \
     $$PWD/qmidimessage.cpp \
-    $$PWD/qmidimapper.cpp
+    $$PWD/qmidimapper.cpp \
+    $$PWD/qmidipianoroll.cpp
 
 DISTFILES += \
     $$PWD/README.md

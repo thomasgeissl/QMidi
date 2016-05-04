@@ -9,6 +9,8 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 
+#include "qmidipianoroll.h"
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
       _midiIn(new QMidiIn(this)),
@@ -49,6 +51,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     _inConsole->setDisabled(true);
     mainLayout->addWidget(_inConsole);
+    QMidiPianoRoll *pianoRoll = new QMidiPianoRoll();
+    connect(_midiIn, SIGNAL(midiMessageReceived(QMidiMessage*)), pianoRoll, SLOT(onMidiReceive(QMidiMessage*)));
+    mainLayout->addWidget(pianoRoll);
+
+
 
     mainLayout->addWidget(outLabel);
     mainLayout->addWidget(_outPortComboBox);
@@ -71,6 +78,7 @@ MainWindow::MainWindow(QWidget *parent)
     QPushButton *sendMessageButton = new QPushButton("Send message");
     connect(sendMessageButton, SIGNAL(clicked(bool)), this, SLOT(onSendMessageButtonClicked(bool)));
     mainLayout->addWidget(sendMessageButton);
+
 
 
 
