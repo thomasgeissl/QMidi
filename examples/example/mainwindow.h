@@ -18,10 +18,11 @@ public:
     ~MainWindow();
 private:
     QMidiIn *_midiIn;
-    QComboBox *_inPortComboBox;
-    QPlainTextEdit *_inConsole;
-
     QMidiOut *_midiOut;
+
+    QPlainTextEdit *_inConsole;
+    QComboBox *_inPortComboBox;
+
     QComboBox *_outPortComboBox;
     MessageComposer *_messageComposer;
 
@@ -33,6 +34,7 @@ private slots:
     void onInOpenPortButtonClicked(bool value);
     void onInOpenVirtualPortButtonClicked(bool value);
     void onOutOpenPortButtonClicked(bool value);
+    void onOutOpenVirtualPortButtonClicked(bool value);
     void onSendMessageButtonClicked(bool value);
 
 };

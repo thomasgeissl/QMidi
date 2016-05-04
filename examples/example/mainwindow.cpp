@@ -13,9 +13,9 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
       _midiIn(new QMidiIn(this)),
       _midiOut(new QMidiOut(this)),
+      _inConsole(new QPlainTextEdit),
       _inPortComboBox(new QComboBox(this)),
       _outPortComboBox(new QComboBox(this)),
-      _inConsole(new QPlainTextEdit),
       _messageComposer(new MessageComposer(this))
 {
     QWidget *mainWidget = new QWidget(this);
@@ -53,9 +53,13 @@ MainWindow::MainWindow(QWidget *parent)
     mainLayout->addWidget(outLabel);
     mainLayout->addWidget(_outPortComboBox);
     QPushButton *outOpenPortButton = new QPushButton(tr("Open port"));
+    QPushButton *outOpenVirtualPortButton = new QPushButton(tr("Open virtual port"));
+
     connect(outOpenPortButton, SIGNAL(clicked(bool)), this, SLOT(onOutOpenPortButtonClicked(bool)));
+    connect(outOpenVirtualPortButton, SIGNAL(clicked(bool)), this, SLOT(onOutOpenVirtualPortButtonClicked(bool)));
 
     mainLayout->addWidget(outOpenPortButton);
+    mainLayout->addWidget(outOpenVirtualPortButton);
     mainLayout->addWidget(_messageComposer);
     QLabel *sendLabel = new QLabel("Send message");
     QFont sendLabelFont = sendLabel->font();
@@ -95,6 +99,7 @@ void MainWindow::onInOpenPortButtonClicked(bool value)
 
 void MainWindow::onInOpenVirtualPortButtonClicked(bool value)
 {
+    Q_UNUSED(value);
     _midiIn->openVirtualPort("QMidiExample");
 }
 
@@ -103,6 +108,12 @@ void MainWindow::onOutOpenPortButtonClicked(bool value)
     Q_UNUSED(value);
     qDebug()<<"opening output"<<_outPortComboBox->currentText();
     _midiOut->openPort(_outPortComboBox->currentIndex());
+}
+
+void MainWindow::onOutOpenVirtualPortButtonClicked(bool value)
+{
+    Q_UNUSED(value);
+    _midiOut->openVirtualPort("QMidiExample");
 }
 
 void MainWindow::onSendMessageButtonClicked(bool value)
