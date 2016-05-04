@@ -18,6 +18,7 @@ public:
     void sendRawMessage(std::vector<unsigned char> &message);
     void sendMessage(QMidiMessage *message);
     void openPort(unsigned int index);
+    void openVirtualPort(QString name);
 private:
     RtMidiOut *_midiOut;
 

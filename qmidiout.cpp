@@ -19,6 +19,11 @@ void QMidiOut::openPort(unsigned int index)
 {
     _midiOut->openPort(index);
 }
+
+void QMidiOut::openVirtualPort(QString name)
+{
+    _midiOut->openVirtualPort(name.toStdString());
+}
 void QMidiOut::sendNoteOn(unsigned int channel, unsigned int pitch, unsigned int velocity)
 {
     std::vector<unsigned char> message;
