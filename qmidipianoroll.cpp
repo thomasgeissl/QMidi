@@ -28,6 +28,7 @@ QMidiPianoRoll::QMidiPianoRoll(QWidget *parent) :
         else
         {
             rect = new QGraphicsRectItem(x,0,_keyWidth,_keyHeight/2);
+            rect->setZValue(2);
             QBrush brush;
             QPen pen;
             brush.setStyle(Qt::SolidPattern);
