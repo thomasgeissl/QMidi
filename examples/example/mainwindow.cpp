@@ -7,6 +7,7 @@
 
 #include <QLabel>
 #include <QPushButton>
+#include <QScrollArea>
 #include <QVBoxLayout>
 
 #include "qmidipianoroll.h"
@@ -51,9 +52,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     _inConsole->setDisabled(true);
     mainLayout->addWidget(_inConsole);
-    QMidiPianoRoll *pianoRoll = new QMidiPianoRoll();
+    QScrollArea *pianoRollScroll = new QScrollArea();
+    QMidiPianoRoll *pianoRoll = new QMidiPianoRoll(pianoRollScroll);
+    pianoRollScroll->setWidget(pianoRoll);
     connect(_midiIn, SIGNAL(midiMessageReceived(QMidiMessage*)), pianoRoll, SLOT(onMidiReceive(QMidiMessage*)));
-    mainLayout->addWidget(pianoRoll);
+    mainLayout->addWidget(pianoRollScroll);
 
 
 
