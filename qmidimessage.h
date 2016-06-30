@@ -45,114 +45,24 @@ public:
     explicit QMidiMessage(QObject *parent = 0);
     ~QMidiMessage();
     QMidiMessage(const QMidiMessage &other);
-    QMidiStatus getStatus()
-    {
-        return _status;
-    }
-    unsigned int getChannel()
-    {
-        return _channel;
-    }
-    unsigned int getPitch()
-    {
-        return _pitch;
-    }
-    unsigned int getVelocity()
-    {
-        return _velocity;
-    }
-    unsigned int getControl()
-    {
-        return _control;
-    }
-    unsigned int getValue()
-    {
-        return _value;
-    }
-    double getDeltaTime()
-    {
-        return _deltaTime;
-    }
+    QMidiStatus getStatus();
+    unsigned int getChannel();
+    unsigned int getPitch();
+    unsigned int getVelocity();
+    unsigned int getControl();
+    unsigned int getValue();
+    double getDeltaTime();
 
-    QMidiMessage* setStatus(QMidiStatus status)
-    {
-        _status = status;
-        return this;
-    }
-    QMidiMessage* setChannel(unsigned int channel)
-    {
-        _channel = channel;
-        return this;
-    }
-    QMidiMessage* setPitch(unsigned int pitch)
-    {
-        _pitch = pitch;
-        return this;
-    }
-    QMidiMessage* setVelocity(unsigned int velocity)
-    {
-        _velocity = velocity;
-        return this;
-    }
-    QMidiMessage* setControl(unsigned int control)
-    {
-        _control = control;
-        return this;
-    }
-    QMidiMessage* setValue(unsigned int value)
-    {
-        _value = value;
-        return this;
-    }
-    QMidiMessage* setDeltaTime(double deltaTime)
-    {
-        _deltaTime = deltaTime;
-        return this;
-    }
-    QMidiMessage* setRawMessage(std::vector<unsigned char> rawMessage)
-    {
-        _rawMessage = rawMessage;
-        return this;
-    }
+    QMidiMessage* setStatus(QMidiStatus status);
+    QMidiMessage* setChannel(unsigned int channel);
+    QMidiMessage* setPitch(unsigned int pitch);
+    QMidiMessage* setVelocity(unsigned int velocity);
+    QMidiMessage* setControl(unsigned int control);
+    QMidiMessage* setValue(unsigned int value);
+    QMidiMessage* setDeltaTime(double deltaTime);
+    QMidiMessage* setRawMessage(std::vector<unsigned char> rawMessage);
 
-    std::vector<unsigned char> getRawMessage()
-    {
-        if(_rawMessage.size() == 0)
-        {
-            switch(_status)
-            {
-            case MIDI_NOTE_ON:{
-                _rawMessage.push_back(MIDI_NOTE_ON+_channel-1);
-                _rawMessage.push_back(_pitch);
-                _rawMessage.push_back(_velocity);
-                break;
-            }
-            case MIDI_NOTE_OFF:{
-                _rawMessage.push_back(MIDI_NOTE_OFF+_channel-1);
-                _rawMessage.push_back(_pitch);
-                _rawMessage.push_back(_velocity);
-                break;
-            }
-            case MIDI_CONTROL_CHANGE:{
-                _rawMessage.push_back(MIDI_CONTROL_CHANGE+_channel-1);
-                _rawMessage.push_back(_control);
-                _rawMessage.push_back(_value);
-                break;
-            }
-            case MIDI_PROGRAM_CHANGE:{
-                _rawMessage.push_back(MIDI_PROGRAM_CHANGE+_channel-1);
-                _rawMessage.push_back(_control);
-                _rawMessage.push_back(_value);
-                break;
-            }
-                //TODO: check protocol and implement other cases
-            default:{
-                break;
-            }
-            }
-        }
-        return _rawMessage;
-    }
+    std::vector<unsigned char> getRawMessage();
 
 public:
     QMidiStatus _status;
