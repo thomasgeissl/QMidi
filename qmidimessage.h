@@ -45,6 +45,8 @@ public:
     explicit QMidiMessage(QObject *parent = 0);
     ~QMidiMessage();
     QMidiMessage(const QMidiMessage &other);
+
+    QMidiMessage* clear();
     QMidiStatus getStatus();
     unsigned int getChannel();
     unsigned int getPitch();

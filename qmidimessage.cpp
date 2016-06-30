@@ -2,7 +2,7 @@
 
 QMidiMessage::QMidiMessage(QObject *parent) : QObject(parent)
 {
-
+    clear();
 }
 
 QMidiMessage::~QMidiMessage()
@@ -12,7 +12,26 @@ QMidiMessage::~QMidiMessage()
 
 QMidiMessage::QMidiMessage(const QMidiMessage &other)
 {
+    _status = other._status;
+    _channel = other._channel;
+    _pitch = other._pitch;
+    _velocity = other._velocity;
+    _control = other._control;
+    _value = other._value;
+    _deltaTime = other._deltaTime;
+    _rawMessage = other._rawMessage;
+}
 
+QMidiMessage *QMidiMessage::clear()
+{
+    _status = 0;
+    _channel = 1;
+    _pitch = 0;
+    _velocity = 0;
+    _control = 0;
+    _value = 0;
+    _deltaTime = 0;
+    _rawMessage.clear();
 }
 
 QMidiStatus QMidiMessage::getStatus()
