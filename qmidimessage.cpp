@@ -24,7 +24,7 @@ QMidiMessage::QMidiMessage(const QMidiMessage &other)
 
 QMidiMessage *QMidiMessage::clear()
 {
-    _status = 0;
+    _status = MIDI_UNKNOWN;
     _channel = 1;
     _pitch = 0;
     _velocity = 0;
