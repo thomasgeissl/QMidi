@@ -85,6 +85,9 @@ void QMidiIn::callback(double deltatime, std::vector<unsigned char> *message, vo
                 midiMessage->setPitch((unsigned int) message->at(1));
                 midiMessage->setValue((unsigned int) message->at(2));
                 break;
+            case MIDI_SYSEX:
+                midiMessage->setSysExData(*message);
+                break;
             default:
                 break;
         }

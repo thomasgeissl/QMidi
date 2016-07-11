@@ -54,6 +54,8 @@ public:
     unsigned int getControl();
     unsigned int getValue();
     double getDeltaTime();
+    std::vector<unsigned char> getSysExData();
+
 
     QMidiMessage* setStatus(QMidiStatus status);
     QMidiMessage* setChannel(unsigned int channel);
@@ -62,6 +64,7 @@ public:
     QMidiMessage* setControl(unsigned int control);
     QMidiMessage* setValue(unsigned int value);
     QMidiMessage* setDeltaTime(double deltaTime);
+    QMidiMessage* setSysExData(std::vector<unsigned char> sysExData);
     QMidiMessage* setRawMessage(std::vector<unsigned char> rawMessage);
 
     std::vector<unsigned char> getRawMessage();
@@ -74,6 +77,7 @@ public:
     unsigned int _control;
     unsigned int _value;
     double _deltaTime;
+    std::vector<unsigned char> _sysExData;
 
     std::vector<unsigned char> _rawMessage;
 signals:
