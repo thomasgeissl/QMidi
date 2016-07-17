@@ -19,6 +19,7 @@ QMidiMessage::QMidiMessage(const QMidiMessage &other)
     _control = other._control;
     _value = other._value;
     _deltaTime = other._deltaTime;
+    _sysExData = other._sysExData;
     _rawMessage = other._rawMessage;
 }
 
@@ -31,6 +32,7 @@ QMidiMessage *QMidiMessage::clear()
     _control = 0;
     _value = 0;
     _deltaTime = 0;
+    _sysExData.clear();
     _rawMessage.clear();
 }
 
@@ -67,6 +69,11 @@ unsigned int QMidiMessage::getValue()
 double QMidiMessage::getDeltaTime()
 {
     return _deltaTime;
+}
+
+std::vector<unsigned char> QMidiMessage::getSysExData()
+{
+    return _sysExData;
 }
 
 QMidiMessage *QMidiMessage::setStatus(QMidiStatus status)
@@ -117,6 +124,11 @@ QMidiMessage *QMidiMessage::setRawMessage(std::vector<unsigned char> rawMessage)
     return this;
 }
 
+QMidiMessage *QMidiMessage::setSysExData(std::vector<unsigned char> sysExData){
+    _sysExData = sysExData;
+    return this;
+}
+
 std::vector<unsigned char> QMidiMessage::getRawMessage()
 {
     if(_rawMessage.size() == 0)
@@ -147,7 +159,14 @@ std::vector<unsigned char> QMidiMessage::getRawMessage()
             _rawMessage.push_back(_value);
             break;
         }
+        case MIDI_SYSEX:{
+            _rawMessage = _sysExData;
+            if(_sysExData.back() != MIDI_SYSEX_END) _rawMessage.push_back(MIDI_SYSEX_END);
+            break;
+        }
+
             //TODO: check protocol and implement other cases
+
         default:{
             break;
         }
