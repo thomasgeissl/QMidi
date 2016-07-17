@@ -105,6 +105,7 @@ void MainWindow::onInOpenPortButtonClicked(bool value)
 {
     Q_UNUSED(value);
     qDebug()<<"opening input"<<_inPortComboBox->currentText();
+    if(_midiIn->isPortOpen()) _midiIn->closePort();
     _midiIn->openPort(_inPortComboBox->currentIndex());
 }
 
@@ -118,6 +119,7 @@ void MainWindow::onOutOpenPortButtonClicked(bool value)
 {
     Q_UNUSED(value);
     qDebug()<<"opening output"<<_outPortComboBox->currentText();
+    if(_midiOut->isPortOpen()) _midiOut->closePort();
     _midiOut->openPort(_outPortComboBox->currentIndex());
 }
 

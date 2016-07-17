@@ -19,6 +19,8 @@ public:
     void sendRawMessage(std::vector<unsigned char> &message);
     void openPort(unsigned int index);
     void openVirtualPort(QString name);
+    void closePort();
+    bool isPortOpen();
 private:
     RtMidiOut *_midiOut;
 
