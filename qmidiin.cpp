@@ -36,6 +36,14 @@ void QMidiIn::openPort(QString name)
         }
     }
 }
+void QMidiIn::closePort()
+{
+    _midiIn->closePort();
+}
+bool QMidiIn::isPortOpen()
+{
+    return _midiIn->isPortOpen();
+}
 void QMidiIn::setIgnoreTypes(bool sysex, bool time, bool sense)
 {
     _midiIn->ignoreTypes(sysex, time, sense);

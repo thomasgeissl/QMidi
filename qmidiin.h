@@ -16,6 +16,8 @@ public:
     void openPort(QString name);
     void openPort(unsigned int index);
     void openVirtualPort(QString name);
+    void closePort();
+    bool isPortOpen();
     void setIgnoreTypes(bool sysex = true, bool time = true, bool sense = true);
 private:
     void onMidiMessageReceive(QMidiMessage *msg);
