@@ -100,6 +100,7 @@ QMidiMessage *MessageComposer::getMidiMessage()
 
     message->setStatus(status);
     message->setPitch(_pitchSpinBox->value());
+    message->setVelocity(_velocitySpinBox->value());
     message->setControl(_controlSpinBox->value());
     message->setValue(_valueSpinBox->value());
 //    message->setDeltaTime(_delta)
