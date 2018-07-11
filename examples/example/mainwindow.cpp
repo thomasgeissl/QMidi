@@ -19,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
       _inConsole(new QPlainTextEdit),
       _inPortComboBox(new QComboBox(this)),
       _outPortComboBox(new QComboBox(this)),
+      _forwardCheckBox(new QCheckBox(this)),
       _messageComposer(new MessageComposer(this))
 {
     QWidget *mainWidget = new QWidget(this);
@@ -49,6 +50,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     mainLayout->addWidget(inOpenPortButton);
     mainLayout->addWidget(inOpenVirtualPortButton);
+    _forwardCheckBox->setText("Forward Messages");
+    mainLayout->addWidget(_forwardCheckBox);
 
     _inConsole->setDisabled(true);
     mainLayout->addWidget(_inConsole);
@@ -99,6 +102,10 @@ MainWindow::~MainWindow()
 void MainWindow::onMidiMessageReceive(QMidiMessage *message)
 {
     _inConsole->appendPlainText("status "+QString::number(message->getStatus())+", pitch "+QString::number(message->getPitch()));
+    if (_forwardCheckBox->isChecked())
+    {
+        _midiOut->sendMessage(message);
+    }
 }
 
 void MainWindow::onInOpenPortButtonClicked(bool value)
