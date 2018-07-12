@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QComboBox>
+#include <QCheckBox>
 #include <QMainWindow>
 #include <QPlainTextEdit>
 
@@ -26,7 +27,7 @@ private:
     QComboBox *_outPortComboBox;
     MessageComposer *_messageComposer;
 
-
+    QCheckBox *_forwardCheckBox;
 
 public slots:
     void onMidiMessageReceive(QMidiMessage* message);
