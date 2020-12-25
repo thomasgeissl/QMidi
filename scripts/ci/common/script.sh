@@ -1,5 +1,5 @@
 #!/bin/bash
-set -ev
+# set -ev
 
 for dir in examples/example*/
 do
