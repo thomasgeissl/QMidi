@@ -6,6 +6,6 @@ language: cpp
 sudo: required
 
 install:
-    - ./scripts/TRAVIS_OS_NAME/install.sh
+    - ./scripts/$TRAVIS_OS_NAME/install.sh
     - ./scripts/ci/common/install.sh
 script: . scripts/ci/common/script.sh
