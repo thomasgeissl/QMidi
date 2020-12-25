@@ -1,5 +1,4 @@
 #!/bin/bash
-set -ev
 
 git clone --recursive https://github.com/qt/qtbase.git
 cd qtbase
