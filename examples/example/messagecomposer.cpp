@@ -62,7 +62,7 @@ MessageComposer::MessageComposer(QWidget *parent) : QWidget(parent),
 
 
     mainLayout->setSpacing(0);
-    mainLayout->setMargin(0);
+//    mainLayout->setMargin(0);
     setLayout(mainLayout);
 
 
