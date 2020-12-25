@@ -1,2 +1,2 @@
-brew cask install cmake
+brew install --cask cmake
 cmake --version
