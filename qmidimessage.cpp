@@ -156,13 +156,17 @@ std::vector<unsigned char> QMidiMessage::getRawMessage()
         case MIDI_PROGRAM_CHANGE:{
             _rawMessage.push_back(MIDI_PROGRAM_CHANGE+_channel-1);
             _rawMessage.push_back(_control);
-            _rawMessage.push_back(_value);
             break;
         }
         case MIDI_SYSEX:{
             _rawMessage = _sysExData;
             if(_sysExData.back() != MIDI_SYSEX_END) _rawMessage.push_back(MIDI_SYSEX_END);
             break;
+        }
+         
+        case MIDI_AFTERTOUCH:{
+            _rawMessage.push_back(MIDI_AFTERTOUCH+_channel-1);
+            _rawMessage.push_back(_control);
         }
 
             //TODO: check protocol and implement other cases
