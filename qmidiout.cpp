@@ -51,8 +51,11 @@ void QMidiOut::sendNoteOff(unsigned int channel, unsigned int pitch, unsigned in
 void QMidiOut::sendMessage(QMidiMessage *message)
 {
     std::vector<unsigned char> rawMessage = message->getRawMessage();
-    qDebug()<<"send message"<<rawMessage.front();
-    sendRawMessage(rawMessage);
+    if(!rawMessage.empty()){
+        qDebug()<<"send message"<<rawMessage.front();
+        sendRawMessage(rawMessage);
+    }
+    
 }
 
 void QMidiOut::sendRawMessage(std::vector<unsigned char> &message)
