@@ -83,7 +83,7 @@ void QMidiIn::callback(double deltatime, std::vector<unsigned char> *message, vo
                 break;
             case MIDI_PROGRAM_CHANGE:
             case MIDI_AFTERTOUCH:
-                midiMessage->setValue((unsigned int) message->at(1));
+                midiMessage->setControl((unsigned int) message->at(1));
                 break;
             case MIDI_PITCH_BEND:
                 midiMessage->setValue((unsigned int) (message->at(2) << 7) +
