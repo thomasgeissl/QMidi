@@ -11,16 +11,25 @@ class QMidiPianoRoll :
 {
     Q_OBJECT
 public:
-    explicit QMidiPianoRoll(QWidget *parent = 0);
+    explicit QMidiPianoRoll(QWidget* parent = 0);
+
+    const QColor& pressedColor() const;
+    void          setPressedColor(const QColor& newPressedColor);
+
 protected:
-//    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+    //    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 private:
     bool isSemiTone(int pitch);
 private:
-    QGraphicsScene *_scene;
-    int _keyWidth;
-    int _keyHeight;
+    QGraphicsScene* _scene;
+
+    int  _keyWidth;
+    int  _keyHeight;
+
     QVector<QGraphicsRectItem*> _keys;
+
+    QColor _pressedColor;
+
 signals:
 
 public slots:
