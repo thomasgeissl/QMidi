@@ -1,6 +1,7 @@
 #include "qmidipianoroll.h"
-#include <QPainter>
+#include "qmidimessage.h"
 #include <QGraphicsRectItem>
+#include <QPainter>
 QMidiPianoRoll::QMidiPianoRoll(QWidget *parent) :
     QGraphicsView(parent),
     _scene(new QGraphicsScene()),
@@ -57,7 +58,16 @@ bool QMidiPianoRoll::isSemiTone(int pitch)
     {
         return true;
     }
+}
 
+const QColor& QMidiPianoRoll::pressedColor() const
+{
+    return _pressedColor;
+}
+
+void QMidiPianoRoll::setPressedColor(const QColor& newPressedColor)
+{
+    _pressedColor = newPressedColor;
 }
 
 //void QMidiPianoRoll::paintEvent(QPaintEvent *event)
@@ -72,7 +82,8 @@ void QMidiPianoRoll::onMidiReceive(QMidiMessage *message)
     case MIDI_NOTE_ON: {
         QBrush brush;
         brush.setStyle(Qt::SolidPattern);
-        brush.setColor(QColor(0,0,200, message->getVelocity()*2));
+        brush.setColor(QColor(_pressedColor.red(), _pressedColor.green(), _pressedColor.blue(),
+                              message->getVelocity() * 2));
         _keys[message->getPitch()]->setBrush(brush);
         break;
     }
@@ -92,6 +103,21 @@ void QMidiPianoRoll::onMidiReceive(QMidiMessage *message)
         _keys[message->getPitch()]->setBrush(brush);
         break;
     }
-    default: break;
+    case MIDI_CONTROL_CHANGE: {
+        switch (message->getControl()) {
+        case 120:
+        case 123:
+            if (_isSustain) {
+                for (int i = 0; i < 128; ++i) {
+                    _keys[i]->setBrush(QBrush(isSemiTone(i) ? Qt::black : Qt::white));
+                }
+            }
+            break;
+        }
+        break;
+    }
+
+    default:
+        break;
     }
 }
