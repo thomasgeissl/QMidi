@@ -104,16 +104,16 @@ void QMidiPianoRoll::onMidiReceive(QMidiMessage *message)
         break;
     }
     case MIDI_CONTROL_CHANGE: {
+
         switch (message->getControl()) {
         case 120:
         case 123:
-            if (_isSustain) {
-                for (int i = 0; i < 128; ++i) {
-                    _keys[i]->setBrush(QBrush(isSemiTone(i) ? Qt::black : Qt::white));
-                }
+            for (int i = 0; i < 128; ++i) {
+                _keys[i]->setBrush(QBrush(isSemiTone(i) ? Qt::black : Qt::white));
             }
             break;
         }
+
         break;
     }
 
